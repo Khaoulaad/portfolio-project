@@ -1,5 +1,6 @@
-Mychatroom Chat Application
-Overview
+Mychatroom Chat Application Overview
+
+
 This is a real-time chat application built with Node.js and Socket.io, allowing users to engage in instant messaging with each other. The application provides a user-friendly interface for seamless communication between individuals or groups.
 
 Features
