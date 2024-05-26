@@ -31,4 +31,4 @@ function onConnected(socket) {
   socket.on('feedback', (data) => {
     socket.broadcast.emit('feedback', data)
   })
-
+}
