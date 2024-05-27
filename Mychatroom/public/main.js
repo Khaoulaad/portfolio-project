@@ -1,4 +1,3 @@
-
 const socket = io()
 
 const clientsTotal = document.getElementById('client-total')
@@ -89,4 +88,3 @@ function clearFeedback() {
     element.parentNode.removeChild(element)
   })
 }
-
