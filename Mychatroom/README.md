@@ -18,7 +18,6 @@ The Reemad Chatroom application allows authenticated users to communicate in rea
 - User authentication
 - Real-time messaging
 - Chat history
-- User typing feedback
 - Responsive design
 
 
