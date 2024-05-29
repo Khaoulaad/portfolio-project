@@ -6,7 +6,6 @@ Reemad Chatroom is a real-time chat application designed for internal communicat
 
 - [Description](#description)
 - [Features](#features)
-- [Tech Stack](#tech-stack)
 - [Installation](#installation)
 - [Usage](#usage)
 
