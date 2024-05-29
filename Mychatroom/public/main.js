@@ -6,7 +6,16 @@ const nameInput = document.getElementById('name-input');
 const messageForm = document.getElementById('message-form');
 const messageInput = document.getElementById('message-input');
 
-//const messageTone = new Audio('/message-tone.mp3');
+// Fetch the username from the server
+let currentUsername = ''; // ** New: Added variable to store current username **
+
+fetch('/username')
+  .then(response => response.json())
+  .then(data => {
+    currentUsername = data.username; // ** New: Set currentUsername **
+    document.getElementById('name-input').value = data.username;
+  })
+  .catch(error => console.error('Error fetching username:', error));
 
 messageForm.addEventListener('submit', (e) => {
   e.preventDefault();
@@ -19,13 +28,13 @@ socket.on('clients-total', (data) => {
 
 // Handle chat history
 socket.on('chat-history', (messages) => {
-  messages.forEach(message => addMessageToUI(false, message));
+  messages.forEach(message => addMessageToUI(currentUsername === message.user, message)); // ** Modified: Check if the message is from the current user **);
 });
 
 function sendMessage() {
   if (messageInput.value === '') return;
   const data = {
-    user: nameInput.value,
+    user: currentUsername,
     text: messageInput.value,
     dateTime: new Date(),
   };
@@ -35,7 +44,7 @@ function sendMessage() {
 }
 
 socket.on('chat-message', (data) => {
-  addMessageToUI(false, data);
+  addMessageToUI(currentUsername === data.user, data); // ** Modified: Check if the message is from the current user **
 });
 
 function addMessageToUI(isOwnMessage, data) {
@@ -58,13 +67,13 @@ function scrollToBottom() {
 
 messageInput.addEventListener('focus', () => {
   socket.emit('feedback', {
-    feedback: `✍️ ${nameInput.value} is typing a message`,
+    feedback: `✍️ ${currentUsername} is typing a message`,
   });
 });
 
 messageInput.addEventListener('keypress', () => {
   socket.emit('feedback', {
-    feedback: `✍️ ${nameInput.value} is typing a message`,
+    feedback: `✍️ ${currentUsername} is typing a message`,
   });
 });
 messageInput.addEventListener('blur', () => {
