@@ -23,7 +23,8 @@ messageForm.addEventListener('submit', (e) => {
 });
 
 socket.on('clients-total', (data) => {
-  clientsTotal.innerText = `Total Clients: ${data}`;
+  clientsTotal.innerText = `Total Users: ${data}`;
+
 });
 
 // Handle chat history
@@ -67,20 +68,10 @@ function scrollToBottom() {
 
 messageInput.addEventListener('focus', () => {
   socket.emit('feedback', {
-    feedback: `✍️ ${currentUsername} is typing a message`,
+    feedback: `✍️  ${currentUsername} is typing a message`,
   });
 });
 
-messageInput.addEventListener('keypress', () => {
-  socket.emit('feedback', {
-    feedback: `✍️ ${currentUsername} is typing a message`,
-  });
-});
-messageInput.addEventListener('blur', () => {
-  socket.emit('feedback', {
-    feedback: '',
-  });
-});
 
 socket.on('feedback', (data) => {
   clearFeedback();
