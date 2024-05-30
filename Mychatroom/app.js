@@ -152,5 +152,5 @@ async function startServer() {
     }
 }
 
-/ Start the server
+// Start the server
 startServer();
